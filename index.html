@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advogado Especialista em Remoção de Servidor Público | Dr. Lucas Emanuel Saraiva Pacheco</title>
-  <meta name="description" content="Precisa de remoção como servidor público? Especialista em direito administrativo garante sua remoção por saúde, cônjuge ou interesse particular. Consulta gratuita via WhatsApp." />
+  <title>Remoção de Servidor Público | Dr. Lucas Emanuel Saraiva Pacheco — Advocacia</title>
+  <meta name="description" content="Atuação em processos de remoção de servidor público por saúde, acompanhamento de cônjuge ou interesse particular. Direito Administrativo. Contato via WhatsApp." />
   <meta name="keywords" content="remoção servidor público, advogado remoção servidor, remoção por saúde, remoção cônjuge servidor, direito administrativo, advogado concurso público" />
-  <meta property="og:title" content="Remoção de Servidor Público — Seus Direitos Garantidos na Justiça." />
-  <meta property="og:description" content="Especialista em remoção de servidores públicos. Saúde, cônjuge, interesse particular. Análise gratuita via WhatsApp." />
+  <meta property="og:title" content="Remoção de Servidor Público — Atuação em Direito Administrativo" />
+  <meta property="og:description" content="Atuação em processos de remoção de servidores públicos. Saúde, cônjuge, interesse particular. Contato via WhatsApp." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -416,17 +416,17 @@
       <div class="outro-card reveal">
         <div class="outro-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>Nomeação Judicial</h3>
-        <p>Aprovado mas não nomeado? Atuamos para garantir seu direito subjetivo à nomeação por mandado de segurança.</p>
+        <p>Aprovado mas não nomeado? Atuação voltada ao reconhecimento do direito subjetivo à nomeação, inclusive por mandado de segurança.</p>
       </div>
       <div class="outro-card reveal">
         <div class="outro-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
         <h3>Redistribuição</h3>
-        <p>Movimentação entre órgãos do mesmo poder. Garantimos que o processo respeite os requisitos legais aplicáveis.</p>
+        <p>Movimentação entre órgãos do mesmo poder. Acompanhamento do processo conforme os requisitos legais aplicáveis.</p>
       </div>
       <div class="outro-card reveal">
         <div class="outro-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Aproveitamento</h3>
-        <p>Servidor em disponibilidade buscando novo cargo. Garantimos que sua precedência e direitos legais sejam respeitados.</p>
+        <p>Servidor em disponibilidade buscando novo cargo. Atuação para que a precedência e os direitos legais sejam observados.</p>
       </div>
       <div class="outro-card reveal">
         <div class="outro-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
@@ -533,7 +533,7 @@
         <p style="font-size:.92rem;">Preencha o formulário abaixo e entro em contato o quanto antes.</p>
       </div>
 
-      <form id="contact-form" action="https://formspree.io/f/mdajepvq" method="POST">
+      <form id="contact-form" action="https://formspree.io/f/xbdvalgj" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label for="nome">Nome completo</label>
@@ -582,7 +582,7 @@
         Conversar pelo WhatsApp
       </a>
     </div>
-    <p class="cta-note">Atendimento 24 horas</p>
+    <p class="cta-note">Contato pelo formulário ou WhatsApp</p>
   </div>
 </section>
 
@@ -644,10 +644,17 @@
         formStatus.style.display = 'block';
         contactForm.reset();
       } else {
-        throw new Error('Falha no envio');
+        let detail = '';
+        try {
+          const data = await response.json();
+          if (data && data.errors && data.errors.length) {
+            detail = data.errors.map(er => er.message).join(' | ');
+          }
+        } catch (parseErr) { /* response wasn't JSON */ }
+        throw new Error(detail || `Erro ${response.status}`);
       }
     } catch (err) {
-      formStatus.textContent = 'Não foi possível enviar agora. Tente novamente ou use o WhatsApp.';
+      formStatus.textContent = 'Não foi possível enviar agora (' + err.message + '). Tente novamente ou use o WhatsApp.';
       formStatus.className = 'form-status error';
       formStatus.style.display = 'block';
     } finally {
